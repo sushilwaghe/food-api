@@ -1,8 +1,9 @@
 const express = require('express');
+require('dotenv').config();
 
 const App = express();
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const northIndianFood = ['Misal', 'Poha', 'Paratha', 'Biryani', 'chole Bature']
 const southIndianFood = ['Dosa', 'Idli', 'Uttapa', 'Russam', 'vada']
