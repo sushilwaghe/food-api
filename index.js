@@ -1,52 +1,52 @@
 const express = require('express');
+const { append } = require('express/lib/response');
 require('dotenv').config();
 
 const App = express();
 
 const PORT = process.env.PORT || 5000;
 
-const northIndianFood = ['Misal', 'Poha', 'Paratha', 'Biryani', 'chole Bature']
-const southIndianFood = ['Dosa', 'Idli', 'Uttapa', 'Russam', 'vada']
+const foodItems = [
+    {
+        Id: 1,
+        name: 'Pizza',
+        price: '$10.00',
+        description:'A delicious pizza',
+        image:'https://loremflickr.com/320/240/pizza'
+    },
+    {
+        Id: 2,
+        name: 'Burger',
+        price: '$5.00',
+        description:'A delicious Burger',
+        image:'https://loremflickr.com/320/240/burger'
+    },
+    {
+        Id: 3,
+        name: 'Cake',
+        price: '$3.00',
+        description:'A delicious cake',
+        image:'https://loremflickr.com/320/240/cake'
+    },
+    {
+        Id: 4,
+        name: 'Coffee',
+        price: '$2.00',
+        description:'A delicious coffee',
+        image:'https://loremflickr.com/320/240/coffe'
+    },
+    {
+        Id: 5,
+        name: 'Tea',
+        price: '$1.00',
+        description:'A delicious tea',
+        image:'https://loremflickr.com/320/240/tea'
+    }
+]
 
-App.get('/', (req, res)=>{
-    res.send('Hello World!');
-})
-
-App.get('/food/north', (req, res)=>{
-    const index = Math.floor(Math.random() * northIndianFood.length );
-    res.send({
-        food: northIndianFood[index],
-        price: Math.floor(Math.random() * 100),
-        category: 'north'
-    });
-})
-
-App.get('/food/south', (req, res)=>{
-    const index = Math.floor(Math.random() * southIndianFood.length );
-    res.send({
-        food: southIndianFood[index],
-        price: Math.floor(Math.random() * 100),
-        category: 'south'
-    });
-})
-
-App.get('/food/mix', (req, res)=>{
-    const combinedFood = northIndianFood.concat (southIndianFood);
-    const index = Math.floor(Math.random() * combinedFood.length );
-    res.send({
-        food: combinedFood[index],
-        price: Math.floor(Math.random() * 100),
-        category: 'mix'
-    });
-})
-
-
-App.get('/about', (req, res)=>{
-    res.send('This is About Page')
-})
-
-App.get('/team', (req, res)=>{
-    res.send('Aniket,Chetan,Amar,Deva,Chiku,sourabh,sushil')
+App.get("/food/random", (req, res)=> {
+    const randomItem = foodItems[Math.floor(Math.random() * foodItems.length)]
+    res.send(randomItem);
 })
 
 App.listen(PORT, ()=>{
